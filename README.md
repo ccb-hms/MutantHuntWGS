@@ -165,6 +165,10 @@ The image below shows an example of the directory I set up on my Desktop when te
 
 ## Folder and File contents
 
+### params.txt
+
+A .txt file containing the input parameters passed to the script for that particular run.
+
 ### Alignment_Stats
 
 Contains TXT files with the stats that Bowtie2 normally would print to the screen. This tells you how many reads you had in your input file and how well they aligned to the reference genome. One file will be generated per sample.
@@ -185,6 +189,10 @@ Contains a folder for each mutant within which you will find VCF, TXT and HTML f
 
 Contains a folder for each mutant within which you will find an XLS and VCF file. This program will map variants within protein coding genes only and score them based off how badly they are predicted to alter protein function. The XLS file contains information on all variants and provides the SIFT scores (SIFT_SCORE column) and interpretation of those scores (SIFT_PREDICTION column) as well as additional information about each variant. The VCF file contains all the variants input into SIFT, but now includes additional information following `SIFTINFO=` in the info field.
 
+### QualiMap
 
+Contains a folder containing all the QualiMap reports as PDF files for every mutant ran in the pipeline. A QC report (plots & statistics) is produced from each BAM file generated. The coverage plot on page 6 is adjusted so that a high proportion of reads aligning to just a small fraction of the genome.
 
+### zero-read_Coverage
 
+`bedtools genomecov`coverage reports for zero-read regions. Reported as a single output line describing the chromosome, the start and end coordinate of the interval, and followed by the coverage level itself (which should be gaps or `0` coverage).
