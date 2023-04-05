@@ -8,10 +8,6 @@
 
 # MutantHuntWGS_O2 available (4/5/23) modified MutantHuntWGS_v1.1 pipeline for use on HMS O2 cluster
 
-# MutantHuntWGS_v1.1 now available (MutantHuntWGS_v1.1.sh)
-
-## The original is still available (MutantHuntWGS.sh)
-
 ## Why v1.1?
 
 **1. One of our users identified an error coming from VCFtools that (simply put) was causing the pipeline to fail if there were not variants on all chromosomes in the wild type. This has now been corrected. We would like to thank Payal Arora, a graduate student in the Kaplan lab here at UPitt, for here help identifying this issue and for graciously offering us her solution to the problem so that we could update MutantHuntWGS to ensure others did not experience this same issue.**
@@ -38,37 +34,57 @@ MutantHuntWGS_v1.1.sh \
 
 
 
-# Setup and Run
+# Setup and Run on O2
 
 **1. Create a directory (a folder) in a directory of your choice (on your Desktop is fine) named `./Analysis_Directory`. Within `./Analysis_Directory` create a file directory named `./FASTQ` inside of `./Analysis_Directory` and place all FASTQ files into it (full path: `./PATH_TO_DESKTOP/Analysis_Directory/FASTQ`).**
 
-**2. Ensure that FASTQ files are gzipped (can run `gzip FILENAME.fastq` to generate `FILENAME.fastq.gz`) and adhere to the naming convention described below and that all gzipped FASTQ files (fastq.gz) are placed into the FASTQ folder that you created in Step 2. THIS IS REALLY IMPORTANT.**
+**2. Ensure that FASTQ files are gzipped (can run `gzip FILENAME.fastq` to generate `FILENAME.fastq.gz`) and adhere to the naming convention described below and that all gzipped FASTQ files (fastq.gz) are placed into the FASTQ folder that you created. THIS IS REALLY IMPORTANT.**
 
    * Single end sequencing FASTQ file should be named: FILENAME.fastq.gz
 
    * Paired end sequencing FASTQ files should be named: FILENAME_R1.fastq.gz and FILENAME_R2.fastq.gz
-
-   * I suggest making copies of your FASTQ files rather then renaming the originals in case a mistake is made during the renaming process.
 
    * For this naming example "FILENAME" will be used as the input for the -n option below. 
 
    * "FILENAME" should not have any spaces or punctuation, not even underscores.
 
 
-**3. Run MutantHuntWGS by running the code below to test.**
+**3. Modify the driver script `SLURM_MutantHunt_run.sh` with the paths to your input FASTQ files and desired output directory, see the example below**
+
 ```
-MutantHuntWGS.sh \
-    -n wttoy \
-    -g /Main/MutantHuntWGS/S_cerevisiae_Bowtie2_Index_and_FASTA/genome \
-    -f /Main/MutantHuntWGS/S_cerevisiae_Bowtie2_Index_and_FASTA/genome.fa \
+#!/bin/bash
+#SBATCH --partition=short   #choose a partition to run on
+#SBATCH -c 16 #choose how many cores
+#SBATCH --time=0-5:00:00 #estimated run time
+#SBATCH --mem=16G #choose how much ram RAM 
+#SBATCH --mail-type=ALL #ALL email types
+#SBATCH --mail-user=<YOURNAMEHERE>@hms.harvard.edu #where to send email updates
+
+#this line loads the software the pipeline needs to run
+module load gcc/6.2.0 bowtie2/2.2.9 samtools/1.3.1  bcftools/1.3.1 vcftools/0.1.15 java/jdk-1.8u112 snpEff/4.3g qualimap/2.2.1 bedtools/2.27.1
+
+#this line runs the script
+<PATH TO THIS REPO>/MutantHuntWGS_o2.sh \
+    -n sample-# \
+    -g <PATH TO THIS REPO>/S_cerevisiae_Bowtie2_Index_and_FASTA/genome \
+    -f <PATH TO THIS REPO>/S_cerevisiae_Bowtie2_Index_and_FASTA/genome.fa \
     -r single \
-    -s 0 \
-    -p /Main/MutantHuntWGS/S_cerevisiae_Bowtie2_Index_and_FASTA/ploidy_n1.txt \
-    -d /Main/MutantHuntWGS/FASTQ_test \
-    -o /Main/Analysis_Directory/test_output \
-    -a YES
+    -s 10 \
+    -p <PATH TO THIS REPO>/S_cerevisiae_Bowtie2_Index_and_FASTA/ploidy_n1.txt \
+    -d <PATH TO YOUR OUTPUT>/Analysis_Directory/FASTQ \
+    -o <PATH TO YOUR OUTPUT>/Analysis_Directory/<NAME OF EXPERIMENT> \
+    -a YES \
+    -t 16
+
+date
+
 ```
 
+**5. Submit the pipeline to the SLURM scheduler**
+
+```
+sbatch SLURM_MutantHunt_run.sh
+```
 
 
 # MutantHuntWGS Options
