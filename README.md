@@ -4,7 +4,9 @@
 ## A bioinformatics pipeline for identification and characterization of mutations in *Saccharomyces cerevisiae*. MutantHuntWGS compares data, input in FASTQ format, from a mutant strain to a wild-type strain to identify high confidence sequence variants present only in the mutant. This pipeline was designed to be as user friendly as possible.
 
 
-![picture alt](https://github.com/mae92/MutantHuntWGS/blob/master/images/Figure_1_for_GitHub.jpg)
+![picture alt](https://github.com/ccb-hms/MutantHuntWGS/blob/master/images/Figure_1_for_GitHub.jpg)
+
+# MutantHuntWGS_O2 available (4/5/23) modified MutantHuntWGS_v1.1 pipeline for use on HMS O2 cluster
 
 # MutantHuntWGS_v1.1 now available (MutantHuntWGS_v1.1.sh)
 
@@ -16,11 +18,7 @@
 
 **2. The aligner has the capability to use multiple processors and was set to the maximum number under the assumption that it would default to the max that was available, but we believe that under these conditions it is actually defaulting to the mininmum. Therefore, we created an option for number of processors/threads -t that can be set to an integer value to specify how many processors to use. This should speed up the analysis. On your average laptop you will only be able to set it to 4 at max and we reccomend only setting it to 3.**
 
-## How do I get the docker container for v1.1?
-### Like this:
-```
-docker run -it -v /PATH_TO_DESKTOP/Analysis_Directory:/Main/Analysis_Directory mellison/mutant_hunt_wgs:version1.1
-```
+
 
 ## How do I run v1.1?
 ### Like this:
@@ -38,17 +36,13 @@ MutantHuntWGS_v1.1.sh \
     -t 3
 ```
 
-## All other use instructions are the same as the original. The orinal version is included in this container too so you can also run it if you would like.
 
 
 # Setup and Run
 
-**1. Follow the instructions at https://docs.docker.com/get-docker/ to download and install Docker on your computer.**
+**1. Create a directory (a folder) in a directory of your choice (on your Desktop is fine) named `./Analysis_Directory`. Within `./Analysis_Directory` create a file directory named `./FASTQ` inside of `./Analysis_Directory` and place all FASTQ files into it (full path: `./PATH_TO_DESKTOP/Analysis_Directory/FASTQ`).**
 
-
-**2. Create a directory (a folder) in a directory of your choice (on your Desktop is fine) named `./Analysis_Directory`. Within `./Analysis_Directory` create a file directory named `./FASTQ` inside of `./Analysis_Directory` and place all FASTQ files into it (full path: `./PATH_TO_DESKTOP/Analysis_Directory/FASTQ`).**
-
-**3. Ensure that FASTQ files are gzipped (can run `gzip FILENAME.fastq` to generate `FILENAME.fastq.gz`) and adhere to the naming convention described below and that all gzipped FASTQ files (fastq.gz) are placed into the FASTQ folder that you created in Step 2. THIS IS REALLY IMPORTANT.**
+**2. Ensure that FASTQ files are gzipped (can run `gzip FILENAME.fastq` to generate `FILENAME.fastq.gz`) and adhere to the naming convention described below and that all gzipped FASTQ files (fastq.gz) are placed into the FASTQ folder that you created in Step 2. THIS IS REALLY IMPORTANT.**
 
    * Single end sequencing FASTQ file should be named: FILENAME.fastq.gz
 
@@ -60,13 +54,8 @@ MutantHuntWGS_v1.1.sh \
 
    * "FILENAME" should not have any spaces or punctuation, not even underscores.
 
-**4. Open the Terminal and download and run the Docker container for MutantHuntWGS by copying and pasting the following command into the terminal:**
 
-```
-docker run -it -v /PATH_TO_DESKTOP/Analysis_Directory:/Main/Analysis_Directory mellison/mutant_hunt_wgs:version1
-```
-
-**5. Run MutantHuntWGS by running the code below to test.**
+**3. Run MutantHuntWGS by running the code below to test.**
 ```
 MutantHuntWGS.sh \
     -n wttoy \
@@ -79,8 +68,6 @@ MutantHuntWGS.sh \
     -o /Main/Analysis_Directory/test_output \
     -a YES
 ```
-
-### Because the files and directory structure were set up ahead of time (on the Desktop and during the docker build), and this all runs out of the Docker container, *the file paths in the above commands will all stay the same*, but some of the options may change depending upon your needs. 
 
 
 
