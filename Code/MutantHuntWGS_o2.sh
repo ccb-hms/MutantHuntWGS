@@ -286,7 +286,7 @@ then
 	#Implementing Payals Fix Here
 	
 	#Merge all vcf files with the mock_variant.tmp file
-	cat "$OUTPUT_FILE"/VCF/"$WILD_TYPE"_variants.vcf /n/data1/hms/ccb/projects/yeast_wgs/MutantHuntWGS/S_cerevisiae_Bowtie2_Index_and_FASTA/mock_variant.tsv > "$OUTPUT_FILE"/VCF/"$WILD_TYPE"_variants_merged.vcf
+	cat "$OUTPUT_FILE"/VCF/"$WILD_TYPE"_variants.vcf ../S_cerevisiae_Bowtie2_Index_and_FASTA/mock_variant.tsv > "$OUTPUT_FILE"/VCF/"$WILD_TYPE"_variants_merged.vcf
 		
 	#Create sorted vcf by catenating header in file and sort the non-header and append to the existing file
 	for d in "$OUTPUT_FILE"/VCF/"$WILD_TYPE"_variants_merged.vcf; do grep "^#" $d > $d.sorted; grep -v "^#" $d | sort -k1,1V -k2,2g >> $d.sorted; done
@@ -309,7 +309,7 @@ then
 		#Implementing Payals Fix Here
 		
 		#Merge all vcf files with the mock_variant.tmp file
-		cat "$OUTPUT_FILE"/VCF/"$MUTANT".vcf /n/data1/hms/ccb/projects/yeast_wgs/MutantHuntWGS/S_cerevisiae_Bowtie2_Index_and_FASTA/mock_variant.tsv > "$OUTPUT_FILE"/VCF/"$MUTANT"_merged.vcf
+		cat "$OUTPUT_FILE"/VCF/"$MUTANT".vcf ../S_cerevisiae_Bowtie2_Index_and_FASTA/mock_variant.tsv > "$OUTPUT_FILE"/VCF/"$MUTANT"_merged.vcf
 		
 		#Create sorted vcf by catenating header in file and sort the non-header and append to the existing file
 		for d in "$OUTPUT_FILE"/VCF/"$MUTANT"_merged.vcf; do grep "^#" $d > $d.sorted; grep -v "^#" $d | sort -k1,1V -k2,2g >> $d.sorted; done
@@ -431,7 +431,7 @@ then
 		else
 	
 			##Run SIFT
-			java -jar /n/data1/hms/ccb/projects/yeast_wgs/MutantHuntWGS/SIFT4G_Annotator.jar -c -i "$VCF_FILE"  -d /n/data1/hms/ccb/projects/yeast_wgs/MutantHuntWGS/EF4.74 -r "$OUTPUT_FILE"/SIFT_Output/"$VCF_NAME"
+			java -jar ../SIFT4G_Annotator.jar -c -i "$VCF_FILE"  -d ../EF4.74 -r "$OUTPUT_FILE"/SIFT_Output/"$VCF_NAME"
 	
 	
 		fi

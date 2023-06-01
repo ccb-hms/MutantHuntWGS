@@ -1,0 +1,20 @@
+/mnt2/SIFT_databases//saccharomyces_cerevisiae/EF4.74/XIV_SIFTDB_stats.txt
+STOP-GAINED	85559
+NONSYN	1288297
+SYN	375930
+
+nonsyn/syn ratio: 3.43
+
+All Counts: 39.8 465757/1170254
+dbSNP damaging: -1% 0/0
+Not in dbSNP damaging: 39.9% 465262/1166531
+
+Reference predictions % damaging: 0.2 897/548232
+% predicted on: 94.5878285234
+	A	C	G	T	
+A	-1	38.4	35.4	42.7	
+C	43.9	-1	37.7	38.1	
+G	37.3	38.0	-1	45.1	
+T	42.8	37.9	40.0	-1	
+
+#####################################

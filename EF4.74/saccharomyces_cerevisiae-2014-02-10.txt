@@ -1,0 +1,37 @@
+
+GENE_DOWNLOAD_SITE=ftp://ftp.ensembl.org/pub/release-74//gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.EF4.74.gtf.gz
+PEP_FILE=ftp://ftp.ensembl.org/pub/release-74//fasta/saccharomyces_cerevisiae/pep/Saccharomyces_cerevisiae.EF4.74.pep.all.ga.gz
+CHR_DOWNLOAD_SITE=ftp://ftp.ensembl.org/pub/release-74//fasta/saccharomyces_cerevisiae/dna/
+DBSNP_ORGANISM_DOWNLOAD_SITE=ftp://ftp.ensembl.org/pub/release-74///variation/vcf//saccharomyces_cerevisiae/
+DBSNP_VCF_FILE=Saccharomyces_cerevisiae.vcf.gz
+
+GENE_DOWNLOAD_DEST=/mnt2/SIFT_databases//saccharomyces_cerevisiae/gene-annotation-src
+MO_ROOT_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae
+MO=saccharomyces_cerevisiae
+CHR_DOWNLOAD_DEST=/mnt2/SIFT_databases//saccharomyces_cerevisiae/chr-src
+LOGFILE=saccharomyces_cerevisiae.log
+ZLOGFILE=saccharomyces_cerevisiae_cases_with_N_base.log
+FASTA_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae/fasta
+SUBST_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae/subst
+ALIGN_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae/SIFT_alignments
+SIFT_SCORE_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae/SIFT_predictions
+SINGLE_REC_BY_CHR_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae/singleRecords/
+SINGLE_REC_WITH_SIFTSCORE_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae/singleRecords/records_with_scores
+DBSNP_FINAL_OUTPUT_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae/dbsnp_Output
+MO_OUT_DIR=/mnt2/SIFT_databases//saccharomyces_cerevisiae/EF4.74
+
+
+#Running MO' SIFT
+#make sure <PROTEIN_DB>_5_hash.bin and <PROTEIN_DB>_5_index.bin are already created
+SIFTSHARP_PATH=/mnt1/MO_SIFT_v0.1/siftsharp
+PROTEIN_DB=/mnt1/MO_SIFT_v0.1/database/uniprot_nar2012_publication/uniref90.fasta
+
+
+# Doesn't need to change
+DEBUG_DIR=/mnt2/debug
+FASTA_LOG=fasta.log
+INVALID_LOG=invalid.log
+PEPTIDE_LOG=peptide.log
+ENS_PATTERN=ENS
+SINGLE_RECORD_PATTERN=:change:_aa1valid_dbsnp.singleRecord
+
